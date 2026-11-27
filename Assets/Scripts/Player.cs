@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();//Получаем вектор движения из скрипта GameInput 
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();//Получаем данные, вектор движения из скрипта GameInput 
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
         transform.position += moveDir * moveSpeed * Time.deltaTime;
