@@ -13,7 +13,13 @@ public class Player : MonoBehaviour
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();//Получаем данные, вектор движения из скрипта GameInput 
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-        transform.position += moveDir * moveSpeed * Time.deltaTime;
+
+        float PlaySize = 0.7f; //Размер персонажа, чтобы персонаж не проходил сквозь стены, так как у нас нет коллайдера на персонаже, а есть только коллайдер на стенах, поэтому мы проверяем, есть ли препятствие перед персонажем, если есть, то персонаж не будет двигаться в этом направлении
+        bool canMove = !Physics.Raycast(transform.position, moveDir, PlaySize); //Проверяем, есть ли препятствие перед персонажем !true, если есть, то персонаж не будет двигаться в этом направлении, так как получим false
+        if (canMove) //Если есть препятствие перед персонажем, то персонаж не будет двигаться в этом направлении, а если нет препятствия, то персонаж будет двигаться в этом направлении
+        {
+            transform.position += moveDir * moveSpeed * Time.deltaTime;
+        }
 
         isWalking = moveDir != Vector3.zero; //Анимация ходьбы будет проигрываться только когда персонаж движется
 
